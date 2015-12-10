@@ -12,6 +12,6 @@ svg.selectAll("rect")
 	.enter()
 	.append("rect")
 		.attr("x",function(d,i){ return i * (w / dataset.length); })
-		.attr("y",0)
+		.attr("y",function(d){ return h-d; })
 		.attr("width", w / dataset.length - padding)
-		.attr("height",100);			
+		.attr("height", function(d){ return d*5 });			
