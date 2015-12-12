@@ -15,6 +15,27 @@
 			<option value="none">None</option>
 		</select>
 	</p> -->
-	<script src = "../js/index10.js"></script>
+	<div id="display"></div>
+	<script src = "../js/table.js"></script>
+	<script>
+		var display = d3.select("#display");
+
+		d3.json("pics.json", function(err, pics){
+			var data = pics.data.children;
+			console.log(data);
+
+			var display = d3.select("#display");
+
+			//table container
+			var tdiv = display.append("div").classed("table", true)
+
+			var table = d3.chart.table()
+
+			table.data(data)
+
+			table(tdiv)
+
+		})
+	</script>
 </body> 
 </html>

@@ -1,30 +1,23 @@
 if (!d3.chart) d3.chart = {}; 
 
 d3.chart.table = function(){
+	var data;
+	var width;
 
-}
+	function chart(container){
+			
+		var table = container.append("table");
 
-var display = d3.select("#display");
+		var rows = table.selectAll("tr.row")
+			.data(data)
 
-d3.json("pics.json", function(err, pics){
-	
-	var data = pics.data.children;
+		var rowsEnter = rows.enter()
+			.append("tr").classed("row", true)
 
-	console.log(data);
-
-	var display 
-	var table = display.append("table");
-
-	var rows = table.selectAll("tr.row")
-		.data(data)
-
-	var rowsEnter = rows.enter()
-		.append("tr").classed("row", true)
-
-	rowsEnter.append("td")
+		rowsEnter.append("td")
 		.text(function(d){ return d.data.score})
 
-	rowsEnter.append("td")
+		rowsEnter.append("td")
 		.append("a")
 		.attr({
 			href: function(d) { return d.data.url}
@@ -45,6 +38,25 @@ d3.json("pics.json", function(err, pics){
 
 		rowsEnter.append("td")
 		.text(function(d){ return d.data.downs })
+		
+		rows.exit().remove				
+	}
+
+	chart.data = function(value){
+		if(!arguments.length) return data;
+		data = value;
+		return chart;
+	}
+
+	chart.width = function(value){
+		if(!arguments.length) return width;
+		width = value;
+		return chart;
+	}
+
+	return chart;
+}
+
 
 
 
