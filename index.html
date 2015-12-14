@@ -15,8 +15,12 @@
 			<option value="none">None</option>
 		</select>
 	</p> -->
+	<svg></svg>
 	<div id="display"></div>
+
 	<script src = "../js/table.js"></script>
+	<script src = "../js/scatterplot.js"></script>
+	<script src = "../js/brush.js"></script>
 	<script>
 		var display = d3.select("#display");
 
@@ -26,16 +30,27 @@
 
 			var display = d3.select("#display");
 
-			//table container
+			//table 
 			var tdiv = display.append("div").classed("table", true)
-
 			var table = d3.chart.table()
-
 			table.data(data)
-
 			table(tdiv)
 
+			var svg = d3.select("svg")
+			//scatter plot
+			var sgroup = svg.append("g")
+			var scatter = d3.chart.scatter()
+			scatter.data(data)
+			scatter(sgroup);
+
+			//brush
+			var bgroup = svg.append("g")
+			var brush = d3.chart.brush()
+			brush.data(data)
+			brush(bgroup)
 		})
+
+
 	</script>
 </body> 
 </html>
